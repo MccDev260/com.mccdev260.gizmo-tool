@@ -1,0 +1,20 @@
+{
+  "name": "com.mccdev260.gizmo-tool",
+  "version": "1.0.0",
+  "displayName": "MccDev260: Gizmo tool",
+  "description": "Editor tool that speeds up setting up and using gizmos without leaving the editor.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "dependencies": {
+  },
+  "keywords": [
+    "gizmo",
+    "editor tool",
+    "tool",
+    "editor"
+  ],
+  "author": {
+    "name": "MccDev260",
+    "email": "mccducky23@gmail.com"
+  }
+}
