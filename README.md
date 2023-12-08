@@ -25,9 +25,8 @@ Features
 *   Line
 *   Line List
 *   Line Strip
-*   Icon
+*   Icon **Note**: Icon file path is `Assets/Gizmos` by default.
 *   GUI Texture
-**Note** Icon file path is `Assets/Gizmos` by default.*   GUI Texture
 
 Installation
 ------------
