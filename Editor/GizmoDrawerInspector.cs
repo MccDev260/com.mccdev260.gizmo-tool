@@ -30,7 +30,8 @@ namespace MccDev260.GizmoTool
             serProp_lineLoopedBool,
             serProp_screenRect,
             serProp_texture,
-            serProp_mat;
+            serProp_mat,
+            serProp_useTransfromVals;
         #endregion
 
         GizmoDrawer gizmoDrawer;
@@ -65,6 +66,8 @@ namespace MccDev260.GizmoTool
             serProp_screenRect = serializedObject.FindProperty("screenRect");
             serProp_texture = serializedObject.FindProperty("texture");
             serProp_mat = serializedObject.FindProperty("mat");
+
+            serProp_useTransfromVals = serializedObject.FindProperty("useTransformValues");
         }
 
         public override void OnInspectorGUI()
@@ -106,28 +109,28 @@ namespace MccDev260.GizmoTool
                 SceneView.RepaintAll();
         }
 
-        static void DrawInspector(GizmoDrawer.GizmoType type, GizmoDrawerInspector editor, out bool showColour, out bool showSingleOrigin)
+        static void DrawInspector(GizmoType type, GizmoDrawerInspector editor, out bool showColour, out bool showSingleOrigin)
         {
             showSingleOrigin = false;
             showColour = false;
 
             switch (type)
             {
-                case GizmoDrawer.GizmoType.Sphere or GizmoDrawer.GizmoType.WireSphere:
+                case GizmoType.Sphere or GizmoType.WireSphere:
                     showSingleOrigin = true;
 
                     showColour = true;
                     EditorGUILayout.PropertyField(editor.serProp_floatRadius);
                     break;
 
-                case GizmoDrawer.GizmoType.Cube or GizmoDrawer.GizmoType.WireCube:
+                case GizmoType.Cube or GizmoType.WireCube:
                     showSingleOrigin = true;
 
                     showColour = true;
                     EditorGUILayout.PropertyField(editor.serProp_vec3Scale);
                     break;
 
-                case GizmoDrawer.GizmoType.Icon:
+                case GizmoType.Icon:
                     showSingleOrigin = true;
                     showColour = true;
 
@@ -135,16 +138,20 @@ namespace MccDev260.GizmoTool
                     EditorGUILayout.PropertyField(editor.serProp_allowScalingBool);
                     break;
 
-                case GizmoDrawer.GizmoType.Mesh or GizmoDrawer.GizmoType.WireMesh:
+                case GizmoType.Mesh or GizmoType.WireMesh:
                     showSingleOrigin = true;
                     showColour = true;
 
                     EditorGUILayout.PropertyField(editor.serProp_mesh);
+                    EditorGUILayout.PropertyField(editor.serProp_useTransfromVals);
+
+                    if (editor.serProp_useTransfromVals.boolValue == true) return;
+
                     EditorGUILayout.PropertyField(editor.serProp_meshRot);
                     EditorGUILayout.PropertyField(editor.serProp_vec3Scale);
                     break;
 
-                case GizmoDrawer.GizmoType.Line:
+                case GizmoType.Line:
                     showSingleOrigin = true;
                     showColour = true;
 
@@ -157,13 +164,13 @@ namespace MccDev260.GizmoTool
                     }
                     break;
 
-                case GizmoDrawer.GizmoType.LineList or GizmoDrawer.GizmoType.LineStrip:
+                case GizmoType.LineList or GizmoType.LineStrip:
                     showSingleOrigin = false;
                     showColour = true;
 
                     EditorGUILayout.PropertyField(editor.serProp_useTransformArrayBool);
 
-                    if (type == GizmoDrawer.GizmoType.LineStrip)
+                    if (type == GizmoType.LineStrip)
                         EditorGUILayout.PropertyField(editor.serProp_lineLoopedBool);
 
                     if (editor.gizmoDrawer.useTransformArray)
@@ -176,7 +183,7 @@ namespace MccDev260.GizmoTool
                     }
                     break;
 
-                case GizmoDrawer.GizmoType.GuiTexture:
+                case GizmoType.GuiTexture:
                     showSingleOrigin = true;
                     showColour = false;
                     EditorGUILayout.PropertyField(editor.serProp_texture);

@@ -1,32 +1,33 @@
+using System;
 using UnityEngine;
 
 # if UNITY_EDITOR
 namespace MccDev260.GizmoTool
 {
-    public static class GizmoUtil
+    internal static class Gizmos
     {
         public static void DrawSphere(Vector3 worldPos, float radius, Color colour)
         {
-            Gizmos.color = colour;
-            Gizmos.DrawSphere(worldPos, radius);
+            UnityEngine.Gizmos.color = colour;
+            UnityEngine.Gizmos.DrawSphere(worldPos, radius);
         }
 
         public static void DrawWireSphere(Vector3 worldPos, float radius, Color colour)
         {
-            Gizmos.color = colour;
-            Gizmos.DrawWireSphere(worldPos, radius);
+            UnityEngine.Gizmos.color = colour;
+            UnityEngine.Gizmos.DrawWireSphere(worldPos, radius);
         }
 
         public static void DrawCube(Vector3 position, Vector3 size, Color colour)
         {
-            Gizmos.color = colour;
-            Gizmos.DrawCube(position, size);
+            UnityEngine.Gizmos.color = colour;
+            UnityEngine.Gizmos.DrawCube(position, size);
         }
 
         public static void DrawWireCube(Vector3 position, Vector3 size, Color colour)
         {
-            Gizmos.color = colour;
-            Gizmos.DrawWireCube(position, size);
+            UnityEngine.Gizmos.color = colour;
+            UnityEngine.Gizmos.DrawWireCube(position, size);
         }
 
         /// <summary>
@@ -39,33 +40,33 @@ namespace MccDev260.GizmoTool
         /// <param name="allowScaling">Determines if the icon is allowed to be scaled.</param>
         public static void DrawIcon(Vector3 position, string fileName, bool allowScaling, Color colour) 
         {
-            Gizmos.DrawIcon(position, fileName, allowScaling, colour);
+            UnityEngine.Gizmos.DrawIcon(position, fileName, allowScaling, colour);
         }
 
         public static void DrawMesh(Mesh mesh, Vector3 position, Quaternion rotation, Vector3 scale, Color colour)
         {
-            Gizmos.color = colour;
-            Gizmos.DrawMesh(mesh, position, rotation, scale);
+            UnityEngine.Gizmos.color = colour;
+            UnityEngine.Gizmos.DrawMesh(mesh, position, rotation, scale);
         }
 
         public static void DrawWireMesh(Mesh mesh, Vector3 position, Quaternion rotation, Vector3 scale, Color colour)
         {
-            Gizmos.color = colour;
-            Gizmos.DrawWireMesh(mesh, position, rotation, scale);
+            UnityEngine.Gizmos.color = colour;
+            UnityEngine.Gizmos.DrawWireMesh(mesh, position, rotation, scale);
         }
 
         public static void DrawLine(Vector3 startPos, Vector3 endPos, Color colour)
         {
-            Gizmos.color = colour;
-            Gizmos.DrawLine(startPos, endPos);
+            UnityEngine.Gizmos.color = colour;
+            UnityEngine.Gizmos.DrawLine(startPos, endPos);
         }
 
         public static void DrawLineList(Vector3[] points, Color colour)
         {
-            Gizmos.color = colour;
+            UnityEngine.Gizmos.color = colour;
             try
             {
-                Gizmos.DrawLineList(points);
+                UnityEngine.Gizmos.DrawLineList(points);
             }
             catch (UnityException)
             {
@@ -75,13 +76,13 @@ namespace MccDev260.GizmoTool
 
         public static void DrawLineStrip(Vector3[] points, Color colour, bool looped)
         {
-            Gizmos.color = colour;
-            Gizmos.DrawLineStrip(points, looped);
+            UnityEngine.Gizmos.color = colour;
+            UnityEngine.Gizmos.DrawLineStrip(points, looped);
         }
 
         public static void DrawGuiTexture(Rect screenRect, Texture texture, Material mat = null)
         {
-            Gizmos.DrawGUITexture(screenRect, texture, mat);
+            UnityEngine.Gizmos.DrawGUITexture(screenRect, texture, mat);
         }
     }
 }
