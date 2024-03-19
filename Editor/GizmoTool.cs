@@ -53,10 +53,16 @@ namespace MccDev260.GizmoTool
                     break;
 
                 case GizmoType.Mesh:
+                    if (drawer.useAttachedTransformValues)
+                        drawer.originTransform = drawer.transform;
+
                     Gizmos.DrawMesh(drawer.mesh, OriginPosition(drawer), MeshRotation(drawer), MeshScale(drawer), drawer.gizmoColor);
                     break;
 
                 case GizmoType.WireMesh:
+                    if (drawer.useAttachedTransformValues)
+                        drawer.originTransform = drawer.transform;
+
                     Gizmos.DrawWireMesh(drawer.mesh, OriginPosition(drawer), MeshRotation(drawer), MeshScale(drawer), drawer.gizmoColor);
                     break;
 
@@ -125,7 +131,7 @@ namespace MccDev260.GizmoTool
 
         static Quaternion MeshRotation(GizmoDrawer drawer)
         {
-            if (drawer.useTransformValues)
+            if (drawer.useAttachedTransformValues)
             {
                 if (drawer.originTransform != null)
                     return drawer.originTransform.rotation;
@@ -138,7 +144,7 @@ namespace MccDev260.GizmoTool
 
         static Vector3 MeshScale(GizmoDrawer drawer)
         {
-            if (drawer.useTransformValues)
+            if (drawer.useAttachedTransformValues)
             {
                 if (drawer.originTransform != null)
                     return drawer.originTransform.localScale;

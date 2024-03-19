@@ -67,7 +67,7 @@ namespace MccDev260.GizmoTool
             serProp_texture = serializedObject.FindProperty("texture");
             serProp_mat = serializedObject.FindProperty("mat");
 
-            serProp_useTransfromVals = serializedObject.FindProperty("useTransformValues");
+            serProp_useTransfromVals = serializedObject.FindProperty("useAttachedTransformValues");
         }
 
         public override void OnInspectorGUI()
@@ -82,7 +82,7 @@ namespace MccDev260.GizmoTool
             EditorGUILayout.PropertyField(serProp_gizmoType, true);
             EditorGUILayout.Space();
 
-            if (_showSingleOrigin)
+            if (_showSingleOrigin && ShowOriginOptions(gizmoDrawer))
             {
                 // Transform
                 EditorGUILayout.PropertyField(serProp_originTrans);
@@ -193,6 +193,17 @@ namespace MccDev260.GizmoTool
                     EditorGUILayout.PropertyField(editor.serProp_mat);
                     break;
             }
+        }
+
+        static bool ShowOriginOptions(GizmoDrawer drawer)
+        {
+            if (drawer.gizmoType == GizmoType.Mesh || drawer.gizmoType == GizmoType.WireMesh)
+            {
+                if (drawer.useAttachedTransformValues) 
+                    return false;
+            }
+
+            return true;
         }
     }
 #endif

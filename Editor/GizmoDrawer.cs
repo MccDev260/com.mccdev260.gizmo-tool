@@ -28,7 +28,7 @@ namespace MccDev260.GizmoTool
         // Mesh
         [HideInInspector] public Mesh mesh;
         [HideInInspector] public Vector3 meshRotation;
-        [HideInInspector] public bool useTransformValues;
+        [HideInInspector] public bool useAttachedTransformValues;
         //Line
         [HideInInspector] public Transform targetTransform;
         [HideInInspector] public Vector3 targetPosition;
