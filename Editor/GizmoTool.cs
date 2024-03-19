@@ -56,14 +56,14 @@ namespace MccDev260.GizmoTool
                     if (drawer.useAttachedTransformValues)
                         drawer.originTransform = drawer.transform;
 
-                    Gizmos.DrawMesh(drawer.mesh, OriginPosition(drawer), MeshRotation(drawer), MeshScale(drawer), drawer.gizmoColor);
+                    Gizmos.DrawMesh(GetMesh(drawer), OriginPosition(drawer), MeshRotation(drawer), MeshScale(drawer), drawer.gizmoColor);
                     break;
 
                 case GizmoType.WireMesh:
                     if (drawer.useAttachedTransformValues)
                         drawer.originTransform = drawer.transform;
 
-                    Gizmos.DrawWireMesh(drawer.mesh, OriginPosition(drawer), MeshRotation(drawer), MeshScale(drawer), drawer.gizmoColor);
+                    Gizmos.DrawWireMesh(GetMesh(drawer), OriginPosition(drawer), MeshRotation(drawer), MeshScale(drawer), drawer.gizmoColor);
                     break;
 
                 case GizmoType.Line:
@@ -153,6 +153,18 @@ namespace MccDev260.GizmoTool
             }
 
             return drawer.scale;
+        }
+
+        static Mesh GetMesh(GizmoDrawer drawer) 
+        {
+            var filter = drawer.transform.GetComponent<MeshFilter>();
+
+            if (filter && drawer.useMeshOnFilter)
+            {
+                return filter.sharedMesh;
+            }
+
+            return drawer.mesh;
         }
     }
 }

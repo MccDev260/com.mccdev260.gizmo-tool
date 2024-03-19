@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System.Runtime.CompilerServices;
 
 namespace MccDev260.GizmoTool
 {
@@ -31,7 +32,8 @@ namespace MccDev260.GizmoTool
             serProp_screenRect,
             serProp_texture,
             serProp_mat,
-            serProp_useTransfromVals;
+            serProp_useTransformVals,
+            serProp_useMeshOnFilter;
         #endregion
 
         GizmoDrawer gizmoDrawer;
@@ -67,7 +69,8 @@ namespace MccDev260.GizmoTool
             serProp_texture = serializedObject.FindProperty("texture");
             serProp_mat = serializedObject.FindProperty("mat");
 
-            serProp_useTransfromVals = serializedObject.FindProperty("useAttachedTransformValues");
+            serProp_useTransformVals = serializedObject.FindProperty("useAttachedTransformValues");
+            serProp_useMeshOnFilter = serializedObject.FindProperty("useMeshOnFilter");
         }
 
         public override void OnInspectorGUI()
@@ -142,10 +145,19 @@ namespace MccDev260.GizmoTool
                     showSingleOrigin = true;
                     showColour = true;
 
-                    EditorGUILayout.PropertyField(editor.serProp_mesh);
-                    EditorGUILayout.PropertyField(editor.serProp_useTransfromVals);
+                    if (ShowMeshOptions(editor.gizmoDrawer))
+                    {
+                        EditorGUILayout.PropertyField(editor.serProp_mesh);
+                    }
 
-                    if (editor.serProp_useTransfromVals.boolValue == true) return;
+                    if (editor.gizmoDrawer.transform.GetComponent<MeshFilter>())
+                    {
+                        EditorGUILayout.PropertyField(editor.serProp_useMeshOnFilter);
+                    }
+
+                    EditorGUILayout.PropertyField(editor.serProp_useTransformVals);
+
+                    if (editor.serProp_useTransformVals.boolValue == true) return;
 
                     EditorGUILayout.PropertyField(editor.serProp_meshRot);
                     EditorGUILayout.PropertyField(editor.serProp_vec3Scale);
@@ -202,6 +214,14 @@ namespace MccDev260.GizmoTool
                 if (drawer.useAttachedTransformValues) 
                     return false;
             }
+
+            return true;
+        }
+
+        static bool ShowMeshOptions(GizmoDrawer drawer)
+        {
+            if (drawer.GetComponent<MeshFilter>() && drawer.useMeshOnFilter)
+                return false;
 
             return true;
         }
