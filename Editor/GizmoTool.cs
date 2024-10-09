@@ -28,7 +28,7 @@ namespace MccDev260.GizmoTool
     {
         internal static void DrawGizmo(GizmoDrawer drawer)
         {
-            var scale = drawer.gameObject.transform.lossyScale;
+            var scale = drawer.scale;
 
             switch (drawer.gizmoType)
             {
