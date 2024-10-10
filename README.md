@@ -11,8 +11,8 @@ The Gizmo Drawer tool is a custom script that allows you to draw built in gizmos
 
 Features
 --------
-* Use a custom Inspector to easily adjust gizmo properties directly in the Unity Editor.
-* Supports all gizmo types, **except Frustum**, as of Editor v2023.3
+* Has a custom Inspector to easily adjust gizmo properties directly in the Editor.
+* Supports nearly all gizmo types, **except Frustum**, as of Editor v2023.3
 * Customize the properties of each gizmo type, such as position, scale, color, and more.
 
 ## Supported Types:
@@ -25,7 +25,7 @@ Features
 *   Line
 *   Line List
 *   Line Strip
-*   Icon **Note**: Icon file path is `Assets/Gizmos` by default.
+*   Icon
 *   GUI Texture
 
 Installation
