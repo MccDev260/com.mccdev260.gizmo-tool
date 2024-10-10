@@ -66,6 +66,15 @@ namespace MccDev260.GizmoTool
         [HideInInspector] public Material mat;
         #endregion
 
+        #region Public Methods
+        public void SetColour(string hexCode) => SetColour(HexToColor(hexCode));
+
+        public void SetColour(Color colour)
+        {
+            gizmoColor = colour;
+        }
+        #endregion
+
         private void OnDrawGizmosSelected()
         {
             if (drawOnSelectOnly)
@@ -76,6 +85,25 @@ namespace MccDev260.GizmoTool
         {
             if (!drawOnSelectOnly)
                 GizmoTool.DrawGizmo(this);
+        }
+
+        private static Color HexToColor(string hex)
+        {
+            if (hex.StartsWith("#"))
+            {
+                hex = hex.Substring(1);
+            }
+
+            if (hex.Length != 6)
+            {
+                Debug.LogError("Invalid hex color code");
+            }
+
+            byte r = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+            byte g = byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+            byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+
+            return new Color(r / 255f, g / 255f, b / 255f);
         }
     }
 }
