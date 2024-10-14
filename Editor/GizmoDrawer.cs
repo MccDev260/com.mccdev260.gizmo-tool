@@ -67,11 +67,11 @@ namespace MccDev260.GizmoTool
         #endregion
 
         #region Public Methods
-        public void SetColour(string hexCode) => SetColour(HexToColor(hexCode));
+        public void SetColor(string hexCode) => SetColor(HexToColor(hexCode));
 
-        public void SetColour(Color colour)
+        public void SetColor(Color color)
         {
-            gizmoColor = colour;
+            gizmoColor = color;
         }
         #endregion
 
@@ -99,10 +99,12 @@ namespace MccDev260.GizmoTool
                 Debug.LogError("Invalid hex color code");
             }
 
+            // Convert hex code to byte
             byte r = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
             byte g = byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
             byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
 
+            // Divide by max byte value to clamp between 0 - 1.
             return new Color(r / 255f, g / 255f, b / 255f);
         }
     }
