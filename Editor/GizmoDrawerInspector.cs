@@ -159,8 +159,10 @@ namespace MccDev260.GizmoTool
 
                     EditorGUILayout.PropertyField(editor.serProp_useTransformVals);
                     bool useTransform = editor.serProp_useTransformVals.boolValue;
-                    if (!useTransform)
+
+                    if (!useTransform && editor.gizmoDrawer.originTransform != null)
                         EditorGUILayout.PropertyField(editor.serProp_useOriginTransformValues);
+                    else editor.gizmoDrawer.useOriginTransformValues = false;
 
                     /* Show rotation and scale fields if we're not using either the transform of the object
                      * the gizmo is on, or the origin transfom.

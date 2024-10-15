@@ -33,42 +33,42 @@ namespace MccDev260.GizmoTool
             switch (drawer.gizmoType)
             {
                 case GizmoType.Sphere:
-                    Gizmos.DrawSphere(OriginPosition(drawer), drawer.floatRadius, drawer.gizmoColor);
+                    Gizmos.DrawSphere(GetOriginPosition(drawer), drawer.floatRadius, drawer.gizmoColor);
                     break;
 
                 case GizmoType.Cube:
-                    Gizmos.DrawCube(OriginPosition(drawer), scale, drawer.gizmoColor);
+                    Gizmos.DrawCube(GetOriginPosition(drawer), scale, drawer.gizmoColor);
                     break;
 
                 case GizmoType.WireSphere:
-                    Gizmos.DrawWireSphere(OriginPosition(drawer), drawer.floatRadius, drawer.gizmoColor);
+                    Gizmos.DrawWireSphere(GetOriginPosition(drawer), drawer.floatRadius, drawer.gizmoColor);
                     break;
 
                 case GizmoType.WireCube:
-                    Gizmos.DrawWireCube(OriginPosition(drawer), scale, drawer.gizmoColor);
+                    Gizmos.DrawWireCube(GetOriginPosition(drawer), scale, drawer.gizmoColor);
                     break;
 
                 case GizmoType.Icon:
-                    Gizmos.DrawIcon(OriginPosition(drawer), drawer.filePathString, drawer.allowScaling, drawer.gizmoColor);
+                    Gizmos.DrawIcon(GetOriginPosition(drawer), drawer.filePathString, drawer.allowScaling, drawer.gizmoColor);
                     break;
 
                 case GizmoType.Mesh:
                     if (drawer.useAttachedTransformValues)
                         drawer.originTransform = drawer.transform;
 
-                    Gizmos.DrawMesh(GetMesh(drawer), OriginPosition(drawer), MeshRotation(drawer), MeshScale(drawer), drawer.gizmoColor);
+                    Gizmos.DrawMesh(GetMesh(drawer), GetOriginPosition(drawer), GetMeshRotation(drawer), GetMeshScale(drawer), drawer.gizmoColor);
                     break;
 
                 case GizmoType.WireMesh:
                     if (drawer.useAttachedTransformValues)
                         drawer.originTransform = drawer.transform;
 
-                    Gizmos.DrawWireMesh(GetMesh(drawer), OriginPosition(drawer), MeshRotation(drawer), MeshScale(drawer), drawer.gizmoColor);
+                    Gizmos.DrawWireMesh(GetMesh(drawer), GetOriginPosition(drawer), GetMeshRotation(drawer), GetMeshScale(drawer), drawer.gizmoColor);
                     break;
 
                 case GizmoType.Line:
-                    drawer.targetPosition = LineTargetPosition(drawer);
-                    Gizmos.DrawLine(OriginPosition(drawer), drawer.targetPosition, drawer.gizmoColor);
+                    drawer.targetPosition = GetLineTargetPosition(drawer);
+                    Gizmos.DrawLine(GetOriginPosition(drawer), drawer.targetPosition, drawer.gizmoColor);
                     break;
 
                 case GizmoType.LineList or GizmoType.LineStrip:
@@ -91,7 +91,7 @@ namespace MccDev260.GizmoTool
             }
         }
 
-        static Vector3 LineTargetPosition(GizmoDrawer drawer)
+        static Vector3 GetLineTargetPosition(GizmoDrawer drawer)
         {
             if (drawer.targetTransform != null)
             {
@@ -101,7 +101,7 @@ namespace MccDev260.GizmoTool
             return drawer.targetPosition;
         }
 
-        static Vector3 OriginPosition(GizmoDrawer drawer)
+        static Vector3 GetOriginPosition(GizmoDrawer drawer)
         {
             if (drawer.originTransform != null)
             {
@@ -129,7 +129,7 @@ namespace MccDev260.GizmoTool
             }
         }
 
-        static Quaternion MeshRotation(GizmoDrawer drawer)
+        static Quaternion GetMeshRotation(GizmoDrawer drawer)
         {
             if (drawer.useAttachedTransformValues)
             {
@@ -143,7 +143,7 @@ namespace MccDev260.GizmoTool
             return Quaternion.Euler(drawer.meshRotation);
         }
 
-        static Vector3 MeshScale(GizmoDrawer drawer)
+        static Vector3 GetMeshScale(GizmoDrawer drawer)
         {
             if (drawer.useAttachedTransformValues)
             {
