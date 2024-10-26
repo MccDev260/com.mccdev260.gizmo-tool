@@ -22,6 +22,7 @@ The Gizmo Tool enables you to use gizmos as components. This project is useful f
 *   Line Strip
 *   Icon
 *   GUI Texture
+*   Ray
 
 ## Considerations
 Since this package is excluded from builds, be mindful of controlling `GizmoDrawer` with runtime scripts.
