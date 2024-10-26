@@ -22,6 +22,8 @@ namespace MccDev260.GizmoTool
 
         Icon,
         GuiTexture,
+
+        Ray,
     }
 
     internal static class GizmoTool
@@ -87,6 +89,10 @@ namespace MccDev260.GizmoTool
                 case GizmoType.GuiTexture:
                     if (drawer.texture != null)
                         Gizmos.DrawGuiTexture(drawer.screenRect, drawer.texture, drawer.mat);
+                    break;
+
+                case GizmoType.Ray:
+                    Gizmos.DrawRay(GetOriginPosition(drawer), drawer.rayDirection, drawer.gizmoColor);
                     break;
             }
         }

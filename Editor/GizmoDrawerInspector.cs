@@ -33,7 +33,8 @@ namespace MccDev260.GizmoTool
         serProp_mat,
         serProp_useTransformVals,
         serProp_useMeshOnFilter,
-        serProp_useOriginTransformValues;
+        serProp_useOriginTransformValues,
+        serProp_vec3RayDirection;
         #endregion
 
         GizmoDrawer gizmoDrawer;
@@ -72,6 +73,8 @@ namespace MccDev260.GizmoTool
             serProp_useTransformVals = serializedObject.FindProperty("useAttachedTransformValues");
             serProp_useMeshOnFilter = serializedObject.FindProperty("useMeshOnFilter");
             serProp_useOriginTransformValues = serializedObject.FindProperty("useOriginTransformValues");
+
+            serProp_vec3RayDirection = serializedObject.FindProperty("rayDirection");
         }
 
         public override void OnInspectorGUI()
@@ -126,14 +129,14 @@ namespace MccDev260.GizmoTool
 
                     showColour = true;
                     EditorGUILayout.PropertyField(editor.serProp_floatRadius);
-                    break;
+                break;
 
                 case GizmoType.Cube or GizmoType.WireCube:
                     enableUseOriginTransform = true;
 
                     showColour = true;
                     EditorGUILayout.PropertyField(editor.serProp_vec3Scale);
-                    break;
+                break;
 
                 case GizmoType.Icon:
                     enableUseOriginTransform = true;
@@ -141,7 +144,7 @@ namespace MccDev260.GizmoTool
 
                     EditorGUILayout.PropertyField(editor.serProp_filePathString);
                     EditorGUILayout.PropertyField(editor.serProp_allowScalingBool);
-                    break;
+                break;
 
                 case GizmoType.Mesh or GizmoType.WireMesh:
                     enableUseOriginTransform = true;
@@ -171,7 +174,7 @@ namespace MccDev260.GizmoTool
 
                     EditorGUILayout.PropertyField(editor.serProp_meshRot);
                     EditorGUILayout.PropertyField(editor.serProp_vec3Scale);
-                    break;
+                break;
 
                 case GizmoType.Line:
                     enableUseOriginTransform = true;
@@ -184,7 +187,7 @@ namespace MccDev260.GizmoTool
                     {
                         EditorGUILayout.PropertyField(editor.serProp_targetPos);
                     }
-                    break;
+                break;
 
                 case GizmoType.LineList or GizmoType.LineStrip:
                     enableUseOriginTransform = false;
@@ -203,7 +206,7 @@ namespace MccDev260.GizmoTool
                     {
                         EditorGUILayout.PropertyField(editor.serProp_linePointArray, true);
                     }
-                    break;
+                break;
 
                 case GizmoType.GuiTexture:
                     enableUseOriginTransform = false;
@@ -213,7 +216,13 @@ namespace MccDev260.GizmoTool
                     EditorGUILayout.PropertyField(editor.serProp_screenRect);
                     EditorGUILayout.Space();
                     EditorGUILayout.PropertyField(editor.serProp_mat);
-                    break;
+                break;
+
+                case GizmoType.Ray:
+                    enableUseOriginTransform = true;
+                    showColour = true;
+                    EditorGUILayout.PropertyField(editor.serProp_vec3RayDirection);
+                break;
             }
         }
 

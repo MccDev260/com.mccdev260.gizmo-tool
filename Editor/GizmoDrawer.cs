@@ -64,6 +64,9 @@ namespace MccDev260.GizmoTool
         /// An optional material to apply the texture.
         /// </summary>
         [HideInInspector] public Material mat;
+
+        // Ray
+        [HideInInspector] public Vector3 rayDirection;
         #endregion
 
         #region Public Methods

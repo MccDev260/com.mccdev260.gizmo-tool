@@ -84,6 +84,12 @@ namespace MccDev260.GizmoTool
         {
             UnityEngine.Gizmos.DrawGUITexture(screenRect, texture, mat);
         }
+
+        internal static void DrawRay(Vector3 originPos, Vector3 direction, Color color)
+        {
+            UnityEngine.Gizmos.color = color;
+            UnityEngine.Gizmos.DrawRay(originPos, direction);
+        }
     }
 }
 #endif

@@ -1,3 +1,6 @@
+# V 1.2.0
+- Added support for Ray gizmo type.
+
 # v1.1.2
 - Hid origin transform option for Gui Texture.
 
