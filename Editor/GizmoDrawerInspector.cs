@@ -8,7 +8,7 @@ namespace MccDev260.GizmoTool
     public class GizmoDrawerInspector : Editor
     {
         bool _hasColour;
-        bool _showSingleOrigin;
+        bool _showOriginTransform;
 
     #region SerializedProps
     SerializedProperty
@@ -86,7 +86,7 @@ namespace MccDev260.GizmoTool
             EditorGUILayout.PropertyField(serProp_gizmoType, true);
             EditorGUILayout.Space();
 
-            if (_showSingleOrigin && ShowOriginOptions(gizmoDrawer))
+            if (_showOriginTransform && ShowMeshOriginOptions(gizmoDrawer))
             {
                 // Transform
                 EditorGUILayout.PropertyField(serProp_originTrans);
@@ -106,7 +106,7 @@ namespace MccDev260.GizmoTool
                 EditorGUILayout.Space();
             }
 
-            DrawInspector(gizmoDrawer.gizmoType, this, out _hasColour, out _showSingleOrigin);
+            DrawInspector(gizmoDrawer.gizmoType, this, out _hasColour, out _showOriginTransform);
 
             serializedObject.ApplyModifiedProperties();
 
@@ -114,29 +114,29 @@ namespace MccDev260.GizmoTool
                 SceneView.RepaintAll();
         }
 
-        static void DrawInspector(GizmoType type, GizmoDrawerInspector editor, out bool showColour, out bool showSingleOrigin)
+        static void DrawInspector(GizmoType type, GizmoDrawerInspector editor, out bool showColour, out bool enableUseOriginTransform)
         {
-            showSingleOrigin = false;
+            enableUseOriginTransform = false;
             showColour = false;
 
             switch (type)
             {
                 case GizmoType.Sphere or GizmoType.WireSphere:
-                    showSingleOrigin = true;
+                    enableUseOriginTransform = true;
 
                     showColour = true;
                     EditorGUILayout.PropertyField(editor.serProp_floatRadius);
                     break;
 
                 case GizmoType.Cube or GizmoType.WireCube:
-                    showSingleOrigin = true;
+                    enableUseOriginTransform = true;
 
                     showColour = true;
                     EditorGUILayout.PropertyField(editor.serProp_vec3Scale);
                     break;
 
                 case GizmoType.Icon:
-                    showSingleOrigin = true;
+                    enableUseOriginTransform = true;
                     showColour = true;
 
                     EditorGUILayout.PropertyField(editor.serProp_filePathString);
@@ -144,7 +144,7 @@ namespace MccDev260.GizmoTool
                     break;
 
                 case GizmoType.Mesh or GizmoType.WireMesh:
-                    showSingleOrigin = true;
+                    enableUseOriginTransform = true;
                     showColour = true;
 
                     if (CanShowMeshOption(editor.gizmoDrawer))
@@ -174,7 +174,7 @@ namespace MccDev260.GizmoTool
                     break;
 
                 case GizmoType.Line:
-                    showSingleOrigin = true;
+                    enableUseOriginTransform = true;
                     showColour = true;
 
 
@@ -187,7 +187,7 @@ namespace MccDev260.GizmoTool
                     break;
 
                 case GizmoType.LineList or GizmoType.LineStrip:
-                    showSingleOrigin = false;
+                    enableUseOriginTransform = false;
                     showColour = true;
 
                     EditorGUILayout.PropertyField(editor.serProp_useTransformArrayBool);
@@ -206,7 +206,7 @@ namespace MccDev260.GizmoTool
                     break;
 
                 case GizmoType.GuiTexture:
-                    showSingleOrigin = true;
+                    enableUseOriginTransform = false;
                     showColour = false;
                     EditorGUILayout.PropertyField(editor.serProp_texture);
                     EditorGUILayout.Space();
@@ -217,7 +217,7 @@ namespace MccDev260.GizmoTool
             }
         }
 
-        static bool ShowOriginOptions(GizmoDrawer drawer)
+        static bool ShowMeshOriginOptions(GizmoDrawer drawer)
         {
             if (drawer.gizmoType == GizmoType.Mesh || drawer.gizmoType == GizmoType.WireMesh)
             {
